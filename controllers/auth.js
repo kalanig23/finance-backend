@@ -8,7 +8,7 @@ const register = async (req, res) => {
 
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      return res.status(400).json({ message: 'Email already registered hai!' });
+      return res.status(400).json({ message: 'Email already registered!' });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -21,7 +21,7 @@ const register = async (req, res) => {
     });
 
     res.status(201).json({
-      message: 'User ban gaya!',
+      message: 'Created User!',
       user: {
         id: user._id,
         name: user.name,
@@ -41,16 +41,16 @@ const login = async (req, res) => {
 
     const user = await User.findOne({ email });
     if (!user) {
-      return res.status(404).json({ message: 'User nahi mila!' });
+      return res.status(404).json({ message: 'User not present!' });
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(400).json({ message: 'Password galat hai!' });
+      return res.status(400).json({ message: 'Wrong Password!' });
     }
 
     if (user.status === 'inactive') {
-      return res.status(403).json({ message: 'Account inactive hai!' });
+      return res.status(403).json({ message: 'Account inactive!' });
     }
 
     const token = jwt.sign(
