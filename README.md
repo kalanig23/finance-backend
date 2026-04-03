@@ -15,7 +15,7 @@ A REST API backend for a finance dashboard system with role-based access control
  
 1. Clone the project
 ```
-git clone https://github.com/AAPKA_USERNAME/finance-backend.git
+git clone https://github.com/kalanig23/finance-backend.git
 ```
 2. Enter into Folder
 ```
